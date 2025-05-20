@@ -1,0 +1,21 @@
+{
+  "name": "ostium-ts-sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for interacting with Ostium trading platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "packageManager": "bun@1.0.0",
+  "scripts": {
+    "build": "bun run tsc -p tsconfig.build.json",
+    "lint": "bunx eslint \"src/**/*.ts\"",
+    "format": "bunx prettier --write \"src/**/*.ts\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.2.0",
+    "eslint": "^8.50.0",
+    "prettier": "^2.8.8",
+    "@typescript-eslint/parser": "^6.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0"
+  }
+}

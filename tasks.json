@@ -1,0 +1,132 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Set Up TypeScript SDK Project",
+      "description": "Initialize TypeScript development environment and build configuration for the SDK.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "details": "Create tsconfig, configure Bun tooling, and ensure compilation outputs to a dist folder. Include linting and basic project scripts in package.json.",
+      "testStrategy": "Run `bun run build` from the ostium-ts-sdk folder and verify that JavaScript files are produced in the dist directory.",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Create tsconfig and build script",
+          "description": "Define compiler options, output directory, and build script inside package.json.",
+          "status": "done",
+          "dependencies": [],
+          "acceptanceCriteria": "tsconfig.json exists with target ES2020 or above and `bun run build` compiles sources to dist."
+        },
+        {
+          "id": 2,
+          "title": "Add linter and formatting tooling",
+          "description": "Configure eslint and prettier for TypeScript sources.",
+          "status": "done",
+          "dependencies": [],
+          "acceptanceCriteria": "Running lint command shows no errors on initial codebase."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Port Core Utilities",
+      "description": "Recreate helper utilities from Python in TypeScript including numeric formatting, error mapping, and conversions.",
+      "status": "todo",
+      "dependencies": [1],
+      "priority": "medium",
+      "details": "Functions in `ostium_python_sdk/utils.py` handle decimal formatting, base unit conversions and error code translation. Implement TypeScript equivalents using number and BigInt types.",
+      "testStrategy": "Write unit tests for each utility function to validate inputs and outputs similar to Python behaviour."    
+    },
+    {
+      "id": 3,
+      "title": "Implement Network Configuration and Subgraph Client",
+      "description": "Complete the TypeScript classes for network configuration and GraphQL queries based on Python implementation.",
+      "status": "todo",
+      "dependencies": [1],
+      "priority": "high",
+      "details": "`NetworkConfig` and `SubgraphClient` already exist in the ts source but are minimal. Match the features of `ostium_python_sdk/config.py` and `ostium_python_sdk/subgraph.py`, providing methods to fetch pairs, pair details, open trades, orders and history.",
+      "testStrategy": "Mock GraphQL responses and verify that each query method returns data in expected format."    
+    },
+    {
+      "id": 4,
+      "title": "Add Price Service",
+      "description": "Implement the price fetcher to mirror Python’s `Price` class.",
+      "status": "todo",
+      "dependencies": [1],
+      "priority": "medium",
+      "details": "Provide functions `getLatestPrices`, `getLatestPriceJson`, and `getPrice` as in the Python version located under `ostium_python_sdk/price.py`. Ensure request errors are properly handled.",
+      "testStrategy": "Mock HTTP requests and confirm that prices are parsed correctly."    
+    },
+    {
+      "id": 5,
+      "title": "Port Formulae and Funding Algorithms",
+      "description": "Re-implement the mathematical formulas for funding rates, rollover, and profit calculations in TypeScript.",
+      "status": "todo",
+      "dependencies": [2],
+      "priority": "medium",
+      "details": "Translate `ostium_python_sdk/formulae.py` and `scscript/funding.py` to TypeScript using BigNumber arithmetic. Maintain function signatures so the SDK can compute liquidation price, funding fee, etc.",
+      "testStrategy": "Cross-check results against the existing Python unit tests by running them with the same inputs in TypeScript."    
+    },
+    {
+      "id": 6,
+      "title": "Implement Blockchain Interaction Module",
+      "description": "Create a TypeScript class equivalent to `Ostium` for interacting with smart contracts via ethers.js.",
+      "status": "todo",
+      "dependencies": [2,3,4],
+      "priority": "high",
+      "details": "Port methods for opening trades, updating orders, adding/removing collateral, and withdrawals from `ostium_python_sdk/ostium.py`. Load contract ABIs and manage transaction signing using the user’s private key.",
+      "testStrategy": "Use a local Hardhat fork to run integration tests that simulate trading actions and verify transaction parameters."    
+    },
+    {
+      "id": 7,
+      "title": "Account Balance and Faucet Modules",
+      "description": "Translate the `Balance` and `Faucet` helpers to TypeScript so developers can manage balances and request testnet tokens.",
+      "status": "todo",
+      "dependencies": [2,6],
+      "priority": "low",
+      "details": "Recreate logic from `balance.py` and `faucet.py` using ethers.js. Only enable faucet requests when using a testnet configuration.",
+      "testStrategy": "Mock contract calls and ensure returned balances or faucet receipts match expected values."    
+    },
+    {
+      "id": 8,
+      "title": "Assemble High-Level SDK",
+      "description": "Combine all TypeScript modules into a cohesive SDK exposed by `OstiumSDK`.",
+      "status": "todo",
+      "dependencies": [3,4,5,6,7],
+      "priority": "high",
+      "details": "Extend the current `OstiumSDK` class in `src/OstiumSDK.ts` with additional properties for blockchain operations, balances, and faucet functionality. Ensure constructor accepts network selection and RPC URL similar to the Python SDK.",
+      "testStrategy": "Instantiate the SDK in a test script and perform sample read-only calls to verify module wiring."    
+    },
+    {
+      "id": 9,
+      "title": "Migrate Example Scripts",
+      "description": "Rewrite Python example scripts under `examples/` in TypeScript and place them in the new SDK folder.",
+      "status": "todo",
+      "dependencies": [8],
+      "priority": "low",
+      "details": "Examples include faucet usage, reading balances, fetching prices, and retrieving positions. Each script should import the TypeScript SDK and demonstrate similar functionality to the Python version.",
+      "testStrategy": "Run the compiled examples against a local testnet to ensure they execute without runtime errors."    
+    },
+    {
+      "id": 10,
+      "title": "Port Test Suite",
+      "description": "Create a Jest based test suite that mirrors the existing Python unit tests.",
+      "status": "todo",
+      "dependencies": [5,6,7,8],
+      "priority": "medium",
+      "details": "Replicate tests from the `tests` directory using Jest and ts-jest. Cover formula calculations and high level SDK behaviours.",
+      "testStrategy": "Running `bun run test` should execute all tests successfully with mocked blockchain and network calls."    
+    },
+    {
+      "id": 11,
+      "title": "Update Documentation",
+      "description": "Expand README files with instructions for the TypeScript SDK and note parity with the Python version.",
+      "status": "todo",
+      "dependencies": [8,9,10],
+      "priority": "low",
+      "details": "Document installation, basic usage, build steps and example code snippets. Mention early-stage status as seen in `ostium-ts-sdk/README.md`.",
+      "testStrategy": "Preview README rendering and check that all code blocks compile when copied."    
+    }
+  ]
+}

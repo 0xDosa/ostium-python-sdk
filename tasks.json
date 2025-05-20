@@ -32,11 +32,11 @@
       "id": 2,
       "title": "Port Core Utilities",
       "description": "Recreate helper utilities from Python in TypeScript including numeric formatting, error mapping, and conversions.",
-      "status": "todo",
+      "status": "done",
       "dependencies": [1],
       "priority": "medium",
       "details": "Functions in `ostium_python_sdk/utils.py` handle decimal formatting, base unit conversions and error code translation. Implement TypeScript equivalents using number and BigInt types.",
-      "testStrategy": "Write unit tests for each utility function to validate inputs and outputs similar to Python behaviour."    
+      "testStrategy": "Write unit tests for each utility function to validate inputs and outputs similar to Python behaviour."
     },
     {
       "id": 3,

@@ -8,7 +8,8 @@
   "scripts": {
     "build": "bun run tsc -p tsconfig.build.json",
     "lint": "bunx eslint \"src/**/*.ts\"",
-    "format": "bunx prettier --write \"src/**/*.ts\""
+    "format": "bunx prettier --write \"src/**/*.ts\"",
+    "test": "bun test"
   },
   "dependencies": {},
   "devDependencies": {

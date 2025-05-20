@@ -1,0 +1,13 @@
+{
+  "name": "ostium-ts-sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for interacting with Ostium trading platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "packageManager": "bun@1.0.0",
+  "scripts": {
+    "build": "bun run tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

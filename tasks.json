@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Set Up TypeScript SDK Project",
       "description": "Initialize TypeScript development environment and build configuration for the SDK.",
-      "status": "todo",
+      "status": "done",
       "dependencies": [],
       "priority": "high",
       "details": "Create tsconfig, configure Bun tooling, and ensure compilation outputs to a dist folder. Include linting and basic project scripts in package.json.",
@@ -14,7 +14,7 @@
           "id": 1,
           "title": "Create tsconfig and build script",
           "description": "Define compiler options, output directory, and build script inside package.json.",
-          "status": "todo",
+          "status": "done",
           "dependencies": [],
           "acceptanceCriteria": "tsconfig.json exists with target ES2020 or above and `bun run build` compiles sources to dist."
         },
@@ -22,7 +22,7 @@
           "id": 2,
           "title": "Add linter and formatting tooling",
           "description": "Configure eslint and prettier for TypeScript sources.",
-          "status": "todo",
+          "status": "done",
           "dependencies": [],
           "acceptanceCriteria": "Running lint command shows no errors on initial codebase."
         }
